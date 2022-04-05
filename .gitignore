@@ -1,2 +1,5 @@
 *.xlsx
 __pycache__
+django/test/test/pyvenv.cfg
+django/test/test/Lib/*
+django/test/test/Scripts/*
