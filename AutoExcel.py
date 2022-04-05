@@ -1,23 +1,46 @@
+import os
 import openpyxl as xl
 from argparse import ArgumentParser
+from os import path
+from threading import Thread
 
-def update_sheet(filename):
-    wb = xl.load_workbook(filename)
-    sheet = wb['Sheet1']
+def update_sheet(file):
+    try:
+        wb = xl.load_workbook(file)
+        ws = wb.active
+        ws.cell(row=1, column=1).value = 'Updated'
+        wb.save(file)
+    except FileNotFoundError:
+        print('File not found: {}'.format(file))
+    except PermissionError:
+        print('Permission denied: {}'.format(file))
+    except Exception as e:
+        print('Error: {}'.format(e))
 
-    corrected_price_cell = sheet.cell(1, 4)
-    corrected_price_cell.value = "corrected price"
-    for row in range(2, sheet.max_row + 1):
-        cell = sheet.cell(row, 3)
-        corrected_price = cell.value * 0.9
-        corrected_price_cell = sheet.cell(row, 4)
-        corrected_price_cell.value = corrected_price
+def get_files(filename):
+    try:
+        if path.isdir(filename):
+            return [f for f in os.listdir(filename) if f.endswith('.xlsx')]
+        if path.isfile(filename) and filename.endswith('.xlsx'):
+            return [filename]
+    except FileNotFoundError:
+        print('File not found: {}'.format(filename))
+
+def main(filename):
+    files = get_files(filename)
+
+    threads = []
+    for file in files:
+        t = Thread(target=update_sheet, args=(file,))
+        t.start()
+        threads.append(t)
+    threads = [t.join() for t in threads]
+    print('Done')
         
-    wb.save(filename)
 
 
 if "__main__" == __name__:
     parser = ArgumentParser()
     parser.add_argument("filename", help="The file or directory of files you want to update")
     args = parser.parse_args()
-    update_sheet(args.filename)
+    main(args.filename)
