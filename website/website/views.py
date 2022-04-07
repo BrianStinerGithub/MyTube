@@ -1,18 +1,16 @@
-from django.shortcuts import render
-from django.views.generic import TemplateView
+from django.shortcuts import render, redirect
 from . import models
 
 def home(request):
-    return render(request, 'home.html', context={'title': 'Home'})
+    return render(request, 'home.html')
 
 def about(request):
-    return render(request, 'about.html', context={'title': 'About'})
+    return render(request, 'about.html')
 
 def contact(request):
-    return render(request, 'contact.html', context={'title': 'Contact'})
+    return render(request, 'contact.html')
 
 def hello(request):
-    return render(request, 'hello.html', context={'title': 'Hello'})
-
+    return render(request, 'hello.html')
 
 
