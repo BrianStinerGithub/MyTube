@@ -56,9 +56,9 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            Path.joinpath(BASE_DIR, 'website\\templates'),
+            Path.joinpath(BASE_DIR, 'website\\static\\html'),
+            Path.joinpath(BASE_DIR, 'website/static/html'),
             Path.joinpath(BASE_DIR, 'website'),
-            Path.joinpath(BASE_DIR, 'website/templates'),
             Path.joinpath(BASE_DIR, ''),
             ],
         'APP_DIRS': True,
@@ -123,11 +123,11 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    Path.joinpath(BASE_DIR, 'website/templates/'),
-    Path.joinpath(BASE_DIR, 'website/dist/css/'),
-    Path.joinpath(BASE_DIR, 'website/dist/js/'),
-    Path.joinpath(BASE_DIR, 'website/dist/img/'),
-    Path.joinpath(BASE_DIR, 'website/dist/html/'),)]
+    Path.joinpath(BASE_DIR, 'website/static/html'),
+    Path.joinpath(BASE_DIR, 'website/static/css/'),
+    Path.joinpath(BASE_DIR, 'website/static/js/'),
+    Path.joinpath(BASE_DIR, 'website/static/img/'),
+    ]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
