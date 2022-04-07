@@ -3,13 +3,16 @@ from django.views.generic import TemplateView
 from .models import *
 
 def index(request):
-    return TemplateView.as_view(template_name='website/templates/index.html', extra_context={'title': 'Home'})(request)
+    return render(request, 'index.html', context={'title': 'Home'})
 
 def about(request):
-    return render(request, 'website/templates/about.html', context={'title': 'About'})
+    return render(request, 'about.html', context={'title': 'About'})
 
 def contact(request):
-    return render(request, 'website/templates/contact.html', context={'title': 'Contact'})
+    return render(request, 'contact.html', context={'title': 'Contact'})
+
+def hello(request):
+    return render(request, 'hello.html', context={'title': 'Hello'})
 
 
 

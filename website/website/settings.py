@@ -59,6 +59,7 @@ TEMPLATES = [
             Path.joinpath(BASE_DIR, 'website\\templates'),
             Path.joinpath(BASE_DIR, 'website'),
             Path.joinpath(BASE_DIR, 'website/templates'),
+            Path.joinpath(BASE_DIR, ''),
             ],
         'APP_DIRS': True,
         'OPTIONS': {
