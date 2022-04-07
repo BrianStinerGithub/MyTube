@@ -56,7 +56,8 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             Path.joinpath(BASE_DIR, 'website\\static\\html'),
-            Path.joinpath(BASE_DIR, 'website'),
+            Path.joinpath(BASE_DIR, 'website\\templates'),
+            Path.joinpath(BASE_DIR, 'website\\templates\\registration'),
             ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -113,6 +114,8 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
+
+LOGIN_REDIRECT_URL = "/"
 
 
 # Static files (CSS, JavaScript, Images)
