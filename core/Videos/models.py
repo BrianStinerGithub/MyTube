@@ -2,7 +2,7 @@ from asyncio.windows_events import NULL
 from unicodedata import category, decimal
 from django.db import models
 
-from core.core.settings import LANGUAGE_CODE
+from core.settings import LANGUAGE_CODE
 from uuid import uuid4
 
 class Channel(models.Model):
@@ -30,9 +30,9 @@ class Playlist(models.Model):
 
 class Video(models.Model):
     name =          models.CharField(max_length=255)
-    file =          models.FileField(upload_to='videos/',blank=False)')
+    file =          models.FileField(upload_to='videos/',blank=False)
     description =   models.TextField(blank=True)
-    duration =      models.IntegerField(max_length=10, decimal_places=0)
+    duration =      models.IntegerField(max_length=10, blank=False)
     url =           models.URLField(blank=True)
     thumbnail=      models.ImageField(upload_to='episode_images',blank=True)
 

@@ -1,20 +1,23 @@
 import json
 from authlib.integrations.django_client import OAuth
-import config as settings
+from config import *
 from django.shortcuts import redirect, render, redirect
 from django.urls import reverse
 from urllib.parse import quote_plus, urlencode
 
 oauth = OAuth()
+from os.path import join, dirname
+with open(join(dirname(__file__), "config.txt")) as f:
+    id, secret, domain=f.read().strip().split("\n")
 
 oauth.register(
     "auth0",
-    client_id=settings.AUTH0_CLIENT_ID,
-    client_secret=settings.AUTH0_CLIENT_SECRET,
+    client_id=id,
+    client_secret=secret,
     client_kwargs={
         "scope": "openid profile email",
     },
-    server_metadata_url=f"https://{settings.AUTH0_DOMAIN}/.well-known/openid-configuration",
+    server_metadata_url=f"https://{domain}/.well-known/openid-configuration",
 )
 
 
@@ -46,11 +49,11 @@ def logout(request):
     request.session.clear()
 
     return redirect(
-        f"https://{settings.AUTH0_DOMAIN}/v2/logout?"
+        f"https://{domain}/v2/logout?"
         + urlencode(
             {
                 "returnTo": request.build_absolute_uri(reverse("index")),
-                "client_id": settings.AUTH0_CLIENT_ID,
+                "client_id": id,
             },
             quote_via=quote_plus,
         ),

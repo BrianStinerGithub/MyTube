@@ -4,4 +4,4 @@ django/test/test/pyvenv.cfg
 django/test/test/Lib/*
 django/test/test/Scripts/*
 secret_key.txt
-config.py
+config.*
