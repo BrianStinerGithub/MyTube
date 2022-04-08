@@ -31,10 +31,11 @@ class Playlist(models.Model):
 class Video(models.Model):
     name =          models.CharField(max_length=255)
     file =          models.FileField(upload_to='videos/',blank=False)
+    thumbnail=      models.ImageField(upload_to='episode_images',blank=True)
     description =   models.TextField(blank=True)
     duration =      models.IntegerField(default=0)
     url =           models.URLField(blank=True)
-    thumbnail=      models.ImageField(upload_to='episode_images',blank=True)
+    
 
 class Comment(models.Model):
     comment =       models.TextField(max_length=1024)

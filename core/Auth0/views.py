@@ -40,13 +40,12 @@ def callback(request):
     print(request.build_absolute_uri(reverse("index")))
     token = oauth.auth0.authorize_access_token(request)
     request.session["user"] = token
-    return redirect('http://127.0.0.1:8000/')
+    return redirect('http://127.0.0.1:8080/')
 
 
 def login(request):
-    print(request.build_absolute_uri(reverse("callback")))
     return oauth.auth0.authorize_redirect(
-        request, 'https://127.0.0.1:8000/auth/callback')
+        request, 'https://127.0.0.1:8080/auth/callback')
 
 
 def logout(request):
