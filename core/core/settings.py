@@ -21,7 +21,8 @@ TEMPLATES_DIR = BASE_DIR / 'core' /'templates'
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-ms5#wnci@x*tuppkb03$jj)2t+t^fc!&$5=!nsf*im8ll97jo^'
+with open(BASE_DIR / 'secret_key.txt') as f:
+    SECRET_KEY = f.read().strip()
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
