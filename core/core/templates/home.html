@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Home{% endblock %}
+{% block content %}
+    {% if session %}
+    <h1>Welcome {{session.userinfo.name}}!</h1>
+    <p><a href="{% url 'logout' %}" id="qsLogoutBtn">Logout</a></p>
+    <div>
+        <pre>{{pretty}}</pre>
+    </div>
+    {% else %}
+    <h1 id="profileDropDown">Welcome Guest</h1>
+    <p><a href="{% url 'login' %}" id="qsLoginBtn">Login</a></p>
+    {% endif %}
+{% endblock %}
