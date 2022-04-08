@@ -32,7 +32,7 @@ class Video(models.Model):
     name =          models.CharField(max_length=255)
     file =          models.FileField(upload_to='videos/',blank=False)
     description =   models.TextField(blank=True)
-    duration =      models.IntegerField(max_length=10, blank=False)
+    duration =      models.IntegerField(default=0)
     url =           models.URLField(blank=True)
     thumbnail=      models.ImageField(upload_to='episode_images',blank=True)
 

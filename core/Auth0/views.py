@@ -5,6 +5,9 @@ from django.shortcuts import redirect, render, redirect
 from django.urls import reverse
 from urllib.parse import quote_plus, urlencode
 
+# TODO: Remove hardcoded urls, replace with reverse()
+
+
 oauth = OAuth()
 from os.path import join, dirname
 with open(join(dirname(__file__), "config.txt")) as f:
@@ -22,10 +25,10 @@ oauth.register(
 
 
 def index(request):
-
+    print(request.build_absolute_uri(reverse("index")))
     return render(
         request,
-        "index.html",
+        "home.html",
         context={
             "session": request.session.get("user"),
             "pretty": json.dumps(request.session.get("user"), indent=4),
@@ -34,18 +37,20 @@ def index(request):
 
 
 def callback(request):
+    print(request.build_absolute_uri(reverse("index")))
     token = oauth.auth0.authorize_access_token(request)
     request.session["user"] = token
-    return redirect(request.build_absolute_uri(reverse("index")))
+    return redirect('http://127.0.0.1:8000/')
 
 
 def login(request):
+    print(request.build_absolute_uri(reverse("callback")))
     return oauth.auth0.authorize_redirect(
-        request, request.build_absolute_uri(reverse("callback"))
-    )
+        request, 'https://127.0.0.1:8000/auth/callback')
 
 
 def logout(request):
+    print(request.build_absolute_uri(reverse("logout")))
     request.session.clear()
 
     return redirect(
