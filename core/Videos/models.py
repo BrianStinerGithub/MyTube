@@ -14,8 +14,8 @@ class Channel(models.Model):
     created_at =    models.DateTimeField(auto_now_add=True)
     updated_at =    models.DateTimeField(auto_now=True)
     owner =         models.ForeignKey('auth.User',on_delete=models.SET_DEFAULT, default=1)
-    icon =          models.ImageField(upload_to='icons/',blank=True)
-    banner =        models.ImageField(upload_to='banners/',blank=True)
+    icon =          models.ImageField(upload_to='Videos/Channels/icons/',blank=True)
+    banner =        models.ImageField(upload_to='Videos/Channel/banners/',blank=True)
     subscribers =   models.ManyToManyField('auth.User', related_name='subscribers', blank=True)
     videos =        models.ManyToManyField('Video', related_name='videos', blank=True)
     views =         models.IntegerField(default=0)
@@ -30,8 +30,8 @@ class Playlist(models.Model):
 
 class Video(models.Model):
     name =          models.CharField(max_length=255)
-    file =          models.FileField(upload_to='videos/',blank=False)
-    thumbnail=      models.ImageField(upload_to='episode_images',blank=True)
+    file =          models.FileField(upload_to='Videos/Videos/',blank=False)
+    thumbnail=      models.ImageField(upload_to='Videos/Thumbnails/',blank=True)
     description =   models.TextField(blank=True)
     duration =      models.IntegerField(default=0)
     url =           models.URLField(blank=True)
