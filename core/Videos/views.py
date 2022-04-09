@@ -3,7 +3,8 @@ from django.views.decorators.http import require_http_methods
 from . import models
 
 def home(request):
-    return render(request, 'home.html')
+    homepage_videos = models.Video.objects.all()
+    return render(request, 'home.html', {'videos': homepage_videos})
 
 def upload(request):
     return render(request, 'upload.html')
@@ -33,17 +34,17 @@ def delete(request, todo_id):
     return redirect("index")
 
 def get_video(request, video_id):
-    return render(request, 'get_video.html')
-
-def add_video(request):
-    return render(request, 'add_video.html')
+    video = models.Video.objects.get(id=video_id)
+    return render(request, 'watch_video.html', {'video': video})
 
 def update_video(request, video_id):
-    return render(request, 'update_video.html')
+    video = models.Video.objects.get(id=video_id)
+    video.complete = not video.complete
+    video.save()
+    return render(request, 'update_video.html', {'video': video})
 
 def delete_video(request, video_id):
-    return render(request, 'delete_video.html')
-
+    return redirect("index")
 
 def get_playlist(request, playlist_id):
     return render(request, 'get_playlist.html')
