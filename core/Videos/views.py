@@ -1,6 +1,8 @@
-import uuid
+from wsgiref.util import request_uri
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.views.decorators.http import require_http_methods
+import requests
 from . import models
 
 def home(request):
@@ -13,56 +15,52 @@ def upload(request):
 def profile(request):
     return render(request, 'profile.html')
 
-
+# Need to work on watch_video.html and css.Play video, channel info, related videos, comments, likes, dislikes, etc.
+@require_http_methods(["GET"])
 def watch_video(request, video_id):
     video = models.Video.objects.get(uuid=video_id)
     return render(request, 'watch_video.html', {'video': video})
 
 @require_http_methods(["POST"])
-def update_video(request, video_id):
-    video = models.Video.objects.get(id=video_id)
-    video.complete = not video.complete
-    video.save()
-    return render(request, 'update_video.html', {'video': video})
+def upload_video(request, video: models.Video):
+    models.Video.objects.create(video)
+    return redirect('home')
 
+@require_http_methods(["POST, PUT"])
+def update_video(request, video: models.Video):
+    models.Video.objects.update(video)
+    return redirect("home")
+
+@require_http_methods(["POST, DELETE"])
 def delete_video(request, video_id):
-    return redirect("index")
-
-def get_playlist(request, playlist_id):
-    return render(request, 'get_playlist.html')
-
-def add_playlist(request):
-    return render(request, 'add_playlist.html')
-
-def update_playlist(request, playlist_id):
-    return render(request, 'update_playlist.html')
-
-def delete_playlist(request, playlist_id):
-    return render(request, 'delete_playlist.html')
+    video = models.Video.objects.get(uuid=video_id)
+    models.Video.objects.delete(video)
+    return redirect("home")
 
 
-def get_channel(request, channel_id):
-    return render(request, 'get_channel.html')
+# Channel CRUD methods, need view_channel.html & CSS. Channel information, videos, playlists, etc.
+@require_http_methods(["GET"])
+def view_channel(request, channel_id):
+    channel = models.Channel.objects.get(uuid=channel_id)
+    return render(request, 'view_channel.html', {'channel': channel})
 
-def add_channel(request):
-    return render(request, 'add_channel.html')
+@require_http_methods(["POST"])
+def create_channel(request, channel: models.Channel):
+    models.Channel.objects.create(channel)
+    return redirect('view_channel', channel.uuid)
 
-def update_channel(request, channel_id):
-    return render(request, 'update_channel.html')
+@require_http_methods(["POST, PUT"])
+def update_channel(request, channel: models.Channel):
+    models.Channel.objects.update(channel)
+    return redirect('view_channel', channel.uuid)
 
+@require_http_methods(["POST, DELETE"])
 def delete_channel(request, channel_id):
-    return render(request, 'delete_channel.html')
+    channel = models.Channel.objects.get(uuid=channel_id)
+    models.Channel.objects.delete(channel)
+    return redirect("home")
 
 
-def get_comment(request, comment_id):
-    return render(request, 'get_comment.html')
 
-def add_comment(request):
-    return render(request, 'add_comment.html')
 
-def update_comment(request, comment_id):
-    return render(request, 'update_comment.html')
-
-def delete_comment(request, comment_id):
-    return render(request, 'delete_comment.html')
 
