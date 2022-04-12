@@ -15,7 +15,7 @@ def upload(request):
 def profile(request):
     return render(request, 'profile.html')
 
-# Need to work on watch_video.html and css.Play video, channel info, related videos, comments, likes, dislikes, etc.
+# TODO: Need to work on watch_video.html and css.Play video, channel info, related videos, comments, likes, dislikes, etc.
 @require_http_methods(["GET"])
 def watch_video(request, video_id):
     video = models.Video.objects.get(uuid=video_id)
@@ -38,7 +38,7 @@ def delete_video(request, video_id):
     return redirect("home")
 
 
-# Channel CRUD methods, need view_channel.html & CSS. Channel information, videos, playlists, etc.
+# TODO: view_channel.html & CSS. Channel information, videos, playlists, etc.
 @require_http_methods(["GET"])
 def view_channel(request, channel_id):
     channel = models.Channel.objects.get(uuid=channel_id)

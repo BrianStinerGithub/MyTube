@@ -3,13 +3,19 @@ import openpyxl as xl
 from argparse import ArgumentParser
 from os import path
 from threading import Thread
+from random import randint
+
+def inject_lorem_ipsum(sheet):
+    text = ['lorum ipsum', 'dolor sit amet', 'consectetur adipiscing elit', 'sed do eiusmod tempor','incididunt ut labore', 'et dolore magna aliqua', 'ut enim ad minim veniam', 'quis nostrud exercitation'] * 10
+    for phrase in text:
+        sheet.cell(row=randint(1,50), column=randint(1,50)).value = phrase
 
 def update_sheet(file):
     try:
-        wb = xl.load_workbook(file)
-        ws = wb.active
-        ws.cell(row=1, column=1).value = 'Updated'
-        wb.save(file)
+        with xl.load_workbook(file) as wb:
+            sheet = wb.active
+            inject_lorem_ipsum(sheet)
+            wb.save(file)
     except FileNotFoundError:
         print('File not found: {}'.format(file))
     except PermissionError:

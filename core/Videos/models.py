@@ -6,8 +6,10 @@ from django.db import models
 from core.settings import LANGUAGE_CODE
 from uuid import uuid4
 
+# Editable = True so we can view to UUID in the admin. 
+# TODO: Make this editable=False before deployment.
 class Channel(models.Model):
-    uuid =          models.UUIDField(default=uuid4, editable=False, unique=True)
+    uuid =          models.UUIDField(default=uuid4, editable=True, unique=True)
     name =          models.CharField(max_length=255)
     about =         models.TextField(blank=True)
     views =         models.IntegerField(default=0)
@@ -24,7 +26,7 @@ class Channel(models.Model):
     playlists =     models.ManyToManyField('Playlist', related_name='playlists', blank=True)
 
 class Playlist(models.Model):
-    uuid =          models.UUIDField(default=uuid4, editable=False, unique=True)
+    uuid =          models.UUIDField(default=uuid4, editable=True, unique=True)
     name =          models.CharField(max_length=255)
     about =         models.TextField(blank=True)
     videos =        models.ManyToManyField('Video', related_name='playlist_videos', blank=True)
