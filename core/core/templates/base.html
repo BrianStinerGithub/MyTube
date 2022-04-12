@@ -1,26 +1,20 @@
-{% load static %}
 <html>
 <head>
     <meta charset="utf-8" />
     <title>{% block title %}Base{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'login.css' %}">
-    {% block style %}.{% endblock %}>
-    <script src="{% static 'bootstrap.min.js' %}"></script>
+    <script src="../static/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../static/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/login.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" >
+    {% block style %}.{% endblock %}
+    
 </head>
 <body>
 <div class="container">
-    {% if session %}
+    
         {% block content %}
         {% endblock %}
-    {% else %}
-    <!-- TODO: This login page need to be less basic. CSS for myVideo, h1, LoginBtn -->
-    <video autoplay muted loop id="myVideo">
-        <source src="https://assets.codepen.io/6093409/river.mp4" type="video/mp4">
-    </video>
-    <h1 id="text-center">All the videos*, all in one place</h1>
-    <h2><a href="{% url 'login' %}" id="LoginBtn">Login</a></h2>
-    {% endif %}
+
 </div>
 </body>
 {% block footer %}
