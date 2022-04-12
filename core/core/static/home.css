@@ -1,56 +1,74 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
-
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border: 1px solid #0f0b0b;
+}
 body {
     font-family: 'Roboto', sans-serif;
 }
 header{
-    height: 2.3em;
+    height: 3em;
     overflow-y: hidden;
+    align-items: center;
+    justify-content: space-between;
+    display: flex;
 }
 li{
     list-style: none;
     display: inline-block;
-    height: 2.3em;
-    margin: auto;
+    align-items: center;
+    margin: 0.5em;
 }
-li > *{
-    display: auto;
-    height: 2.3em;
-    margin: auto;
-}
-
 .left{
     float: left;
+    min-width: 8.6em;
 }
 .right{
     float: right;
+    min-width: 10.6em;
 }
-.search form {
-    border: 1px solid #ddd;
+.center{
+    width: 70%;
+}
+#menu{
+    margin-top: .3em;
+    display: inline-flex;
+    float: left;
+}
+img{
+    display: inline-flex;
+    float: right;
+}
+form {
+    display: flex;
+    border: 1px solid rgb(255, 255, 255);
+    height: 90%;
+    align-items: center;
 }
 
-.search input {
-    width: 400px;
+input {
     border: 0;
     height: 100%;
+    width:  100%;
+    margin: 0 2px 0 10px
 }
-
 input:focus {
     outline: none;
     border: 1px solid #ddd;
+    background-color: #f9f9f9d3;
 }
-
-.search button {
+button {
     height: 100%;
     width: 40px;
     border: 1px slategray;
 }
-
-
 i{
     color: rgb(100, 100, 100);
     padding-left: .5em;
     cursor: pointer;
+    float: none;
 }
 
 
