@@ -4,14 +4,33 @@
     <meta charset="utf-8" />
     <title>{% block title %}Base{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'custom.css' %}">
+    <link rel="stylesheet" href="{% static 'login.css' %}">
+    {% block stylesheet %}{% endblock %}>
     <script src="{% static 'bootstrap.min.js' %}"></script>
 </head>
 <body>
 <div class="container">
-    {% block content %}
-    {% endblock %}
+    {% if session %}
+        {% block content %}
+        {% endblock %}
+    {% else %}
+    <!-- TODO: This login page need to be less basic. CSS for myVideo, h1, LoginBtn -->
+    <video autoplay muted loop id="myVideo">
+        <source src="https://assets.codepen.io/6093409/river.mp4" type="video/mp4">
+    </video>
+    <h1 id="text-center">All the videos*, all in one place</h1>
+    <p><a href="{% url 'login' %}" id="LoginBtn">Login</a></p>
+    {% endif %}
 </div>
 </body>
 {% block footer %}
 {% endblock %}
+
+<!-- 
+
+Block syntax will have an {% extends 'base.html' %} at the top of the file.
+then you can use the {% block var %} tags to replace the content of the base.html file.
+{% if %}, {% else %}, {% endif %}. {% for a in A %}, {% endfor %}. 
+
+
+-->

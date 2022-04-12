@@ -1,54 +1,13 @@
 {% extends 'base.html' %}
 {% block title %}Home{% endblock %}
 {% block content %}
-    {% if session %}
-        <header class="header">.</header>
-        <main>
-            <div class="side-bar">.</div>
-            <div class="content">.</div>
-        </main>
-    {% else %} 
-    <!-- TODO: This login page need to be less basic. CSS for myVideo, h1, LoginBtn -->
-        <video autoplay muted loop id="myVideo">
-            <source src="https://assets.codepen.io/6093409/river.mp4" type="video/mp4">
-        </video>
-        <h1 id="text-center">All the videos*, all in one place</h1>
-        <p><a href="{% url 'login' %}" id="LoginBtn">Login</a></p>
-    {% endif %}
+    <header class="header">.</header>
+    <main>
+        <div class="side-bar">.</div>
+        <div class="content">.</div>
+    </main>
 {% endblock %}
 
-<!-- 
+    
 
-video {
-    object-fit: cover;
-    width: 100vw;
-    height: 100vh;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: -1;
-  }
 
-h1, h2 {
-    color: white;
-    font-family: Trebuchet MS;
-    font-weight: bold;
-    text-align: center;
-}
-
-h1 {
-    font-size: 6rem;
-    margin-top: 30vh;
-    margin-bottom: 10vh; 
-    white-space: break-spaces;
-    line-height: 96px;
-} 
-@media (max-width: 750px) {
-    #background-video { display: none; }
-    body {
-      background: url("https://assets.codepen.io/6093409/river.jpg") no-repeat;
-      background-size: cover;
-    }
-}
-
--->
