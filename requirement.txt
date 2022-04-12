@@ -1,0 +1,4 @@
+authlib
+django
+pillow
+config

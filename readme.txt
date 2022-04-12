@@ -1,1 +1,1 @@
-This repository tracks my progress in the python primer from revature
+1. pip install -r requirements.txt
