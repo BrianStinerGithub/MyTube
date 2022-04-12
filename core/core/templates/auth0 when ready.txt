@@ -1,6 +1,7 @@
     {% if session %}
+        {% block content %}
+        {%  %}
     {% else %}
-    <!-- TODO: This login page need to be less basic. CSS for myVideo, h1, LoginBtn -->
     <video autoplay muted loop id="myVideo">
         <source src="https://assets.codepen.io/6093409/river.mp4" type="video/mp4">
     </video>
