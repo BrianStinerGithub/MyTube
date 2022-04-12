@@ -3,7 +3,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    border: 1px solid #0f0b0b;
+    /* border: 1px solid #0f0b0b; */
 }
 body {
     font-family: 'Roboto', sans-serif;
@@ -32,41 +32,44 @@ li{
 .center{
     width: 70%;
 }
-#menu{
+
+.left #menu{
     margin-top: .3em;
     display: inline-flex;
     float: left;
 }
-img{
+.left img{
     display: inline-flex;
     float: right;
 }
-form {
+.center form {
     display: flex;
     border: 1px solid rgb(255, 255, 255);
     height: 90%;
     align-items: center;
 }
 
-input {
+.center input {
     border: 0;
     height: 100%;
     width:  100%;
-    margin: 0 2px 0 10px
+    margin: 0px 5px 0 10px;
+    padding-left: 10px;
 }
-input:focus {
+.center input:focus {
     outline: none;
     border: 1px solid #ddd;
     background-color: #f9f9f9d3;
 }
-button {
+.center button {
     height: 100%;
     width: 40px;
     border: 1px slategray;
 }
-i{
+li i{
     color: rgb(100, 100, 100);
-    padding-left: .5em;
+    padding-left: .3em;
+    padding-right: .2em;
     cursor: pointer;
     float: none;
 }
@@ -82,16 +85,17 @@ main {
 }
 /* Sidebar */
 .side-bar {
-    height: 100vh;
-    width: 17%;
+    height: 100%;
+    width: 20em;
     background-color: rgb(167, 162, 162);
     overflow-y: hidden;
     transition: .5s all;
 }
 .content {
-    width: 83%;
-    height: 100vh;
-    overflow-y: auto;
+    height: 100%;
+    width: calc(100% - 20em);
+    overflow-y: hidden;
+    background-color: aqua;
 }
 
 
