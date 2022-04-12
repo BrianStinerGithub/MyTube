@@ -4,18 +4,27 @@
     padding: 0;
     box-sizing: border-box;
 }
-
 body {
     font-family: 'Roboto', sans-serif;
+}
+.left{
+    display: flex;
+}
+.right{
+    display: flex;
+}
+.center{
+    display: absolute;
+    left: 0;
+    top : 0;
 }
 
 /* header section*/
 .header {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(100px, 1fr));
 }
 .search form {
-    display: flex;
     border: 1px solid #ddd;
     height: 45px;
 }
@@ -38,9 +47,6 @@ input:focus {
     border: 1px slategray;
 }
 
-.icons {
-    width: 100%;
-}
 
 .material-icons {
     color: rgb(100, 100, 100);
