@@ -39,8 +39,8 @@ class Playlist(models.Model):
 class Video(models.Model):
     uuid =          models.UUIDField(default=uuid4, editable=True, unique=True)
     name =          models.CharField(max_length=255)
-    file =          models.FileField(upload_to='watch/Videos/',blank=False)
-    thumbnail=      models.ImageField(upload_to='watch/Videos/Thumbnails/',blank=True)
+    file =          models.FileField(upload_to='Videos/watch/Videos/',blank=False)
+    thumbnail=      models.ImageField(upload_to='Videos/watch/Videos/Thumbnails/',blank=True)
     description =   models.TextField(blank=True)
     duration =      models.IntegerField(default=0)
     comments =      models.ManyToManyField('Comment', related_name='video_comments', blank=True)
