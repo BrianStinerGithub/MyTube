@@ -5,7 +5,7 @@
     <title>{% block title %}Base{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'login.css' %}">
-    {% block style %}{% endblock %}>
+    {% block style %}.{% endblock %}>
     <script src="{% static 'bootstrap.min.js' %}"></script>
 </head>
 <body>
@@ -19,7 +19,7 @@
         <source src="https://assets.codepen.io/6093409/river.mp4" type="video/mp4">
     </video>
     <h1 id="text-center">All the videos*, all in one place</h1>
-    <p><a href="{% url 'login' %}" id="LoginBtn">Login</a></p>
+    <h2><a href="{% url 'login' %}" id="LoginBtn">Login</a></h2>
     {% endif %}
 </div>
 </body>
