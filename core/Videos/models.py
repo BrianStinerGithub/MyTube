@@ -8,6 +8,7 @@ from uuid import uuid4
 
 # Editable = True so we can view to UUID in the admin. 
 # TODO: Make this editable=False before deployment.
+
 class Channel(models.Model):
     uuid =          models.UUIDField(default=uuid4, editable=True, unique=True)
     name =          models.CharField(max_length=255)
