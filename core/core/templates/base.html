@@ -28,9 +28,10 @@
 
 <!-- 
 
-Block syntax will have an {% extends 'base.html' %} at the top of the file.
-then you can use the {% block var %} tags to replace the content of the base.html file.
-{% if %}, {% else %}, {% endif %}. {% for a in A %}, {% endfor %}. 
+Block syntax will have an { extends 'base.html' %} at the top of the file.
+then you can use the { block var %} tags to replace the content of the base.html file.
+{ if %}, { else %}, { endif %}. { for a in A %}, { endfor %}. 
 
+weirdly, will find jinja syntax inside comments too lol, so had to delete the % sign at the start of the comment.
 
 -->
