@@ -4,13 +4,34 @@
     <title>{% block title %}Base{% endblock %}</title>
     <script src="../static/bootstrap.min.js"></script>
     <link rel="stylesheet" href="../static/bootstrap.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" >
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="../static/base.css">
     {% block style %}<link rel="stylesheet" href="../static/login.css">{% endblock %}
     
 </head>
 <body>
-        {% block content %}
-        {% endblock %}
+    <header>
+        <li class="left">
+            <i class="material-icons" id="menu">menu</i>
+            <img src="https://www.freecodecamp.org/news/content/images/2022/01/yt-logo.png">
+            <!-- TODO: change out for "MyTube" Logo. upload to imgur and link here -->
+        </li>
+        <li class="center">
+            <form action="">
+                <input type="text" placeholder="Search..." />
+                <button><i class="material-icons">search</i></button>
+                <i class="material-icons">mic</i>
+            </form>
+        </li>
+        <li class="right">
+            <i class="material-icons">videocam</i>
+            <i class="material-icons">apps</i>
+            <i class="material-icons">notifications</i>
+            <i class="material-icons">account_circle</i>
+        </li>
+    </header>
+    {% block content %}
+    {% endblock %}
 </body>
 {% block footer %}
 {% endblock %}
