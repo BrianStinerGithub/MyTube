@@ -16,8 +16,6 @@ class Channel(models.Model):
     views =         models.IntegerField(default=0)
     location =      models.CharField(max_length=255, blank=True)
     category =      models.CharField(max_length=255, blank=True)
-    created_at =    models.DateTimeField(auto_now_add=True)
-    updated_at =    models.DateTimeField(auto_now=True)
     owner =         models.ForeignKey('auth.User',on_delete=models.SET_DEFAULT, default=1)
     icon =          models.ImageField(upload_to='Videos/Channels/icons/',blank=True)
     banner =        models.ImageField(upload_to='Videos/Channels/banners/',blank=True)
@@ -25,6 +23,8 @@ class Channel(models.Model):
     videos =        models.ManyToManyField('Video', related_name='videos', blank=True)
     subcriptions =  models.ManyToManyField('Channel', related_name='subscriptions', blank=True)
     playlists =     models.ManyToManyField('Playlist', related_name='playlists', blank=True)
+    created_at =    models.DateTimeField(auto_now_add=True)
+    updated_at =    models.DateTimeField(auto_now=True)
 
 class Playlist(models.Model):
     uuid =          models.UUIDField(default=uuid4, editable=True, unique=True)
@@ -48,6 +48,8 @@ class Video(models.Model):
     likes =         models.ManyToManyField('auth.User', related_name='video_likes', blank=True)
     dislikes =      models.ManyToManyField('auth.User', related_name='video_dislikes', blank=True)
     views =         models.IntegerField(default=0)
+    created_at =    models.DateTimeField(auto_now_add=True)
+    updated_at =    models.DateTimeField(auto_now=True)
 
 class Comment(models.Model):
     video =         models.ForeignKey('Video',on_delete=models.SET_DEFAULT, default=1)
