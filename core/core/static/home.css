@@ -3,19 +3,22 @@ main {
     display: flex;
     background-color: #f9f9f9;
 }
+
 /* Sidebar - 4em to 18em on expansion */
 .side-bar {
     height: 100%;
     width: 4em;
     background-color: rgb(167, 162, 162);
     overflow-y: hidden;
-    
+
 }
-.side-bar.expanded{
+
+.side-bar.expanded {
     width: 18em;
     background-color: rgb(143, 143, 143);
 }
-.side-bar.expanded::after{
+
+.side-bar.expanded::after {
     background-color: rgba(0, 0, 0, 0.192);
     position: absolute;
     content: "";
@@ -23,12 +26,37 @@ main {
     height: calc(100vh - 3em);
     left: 18em;
 }
-.content{
+.side-bar-links {
+    display: grid;
+    grid-template-rows: repeat(auto-fill, 1fr);
+    gap: 1rem;
+    padding: 1rem 0;
+    margin: 0 1.5rem;
+    border-top: 4px solid #CCC;
+    background-color: #AAA;
+}
+
+.side-bar-links>a {
+    display: flex;
+    align-items: center;
+    padding: .5rem 1rem;
+    text-decoration: none;
+    color: #555;
+    transition: color 150ms;
+}
+
+.side-bar-links>a:hover {
+    color: #111;
+    background-color: #555;
+}
+
+.content {
     height: 100%;
     width: calc(100% - 4em);
     background-color: rgb(151, 187, 218);
 }
-.content.expanded{
+
+.content.expanded {
     width: calc(100% - 18em);
     background-color: rgb(255, 0, 0);
 }
@@ -140,17 +168,19 @@ main {
     background-color: #F9F9F9;
 }
 
+/* categories */
 .categories {
     padding: 1rem 2rem;
     border-top: 1px solid #999;
     border-bottom: 1px solid #999;
+    box-shadow:
+        inset 0 0 0 10px 1px rgb(0, 0, 0),
+        inset 0 0 0 20px 0px rgba(70, 70, 70, 0.2);
 }
-
 .category-section {
     display: flex;
     overflow: hidden;
 }
-
 .category {
     margin-right: 1rem;
     word-wrap: none;
@@ -171,7 +201,7 @@ main {
 .category.active {
     background-color: #606060;
     color: white;
-    border-color: #EEE;
+    border-color: rgba(238, 238, 238, 0.452);
 }
 
 .category:last-child {

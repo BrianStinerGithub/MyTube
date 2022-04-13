@@ -1,10 +1,37 @@
 {% extends 'base.html' %}
 {% block title %}Home{% endblock %}
-{% block style %}<link rel="stylesheet" href="../static/home.css">{% endblock %}
-
+{% block style %}<link rel="stylesheet" href="/static/home.css">{% endblock %}
+{% load static %}
 {% block content %}
     <main>
-        <div class="side-bar" name="expandable"></div>
+        <div class="side-bar" name="expandable">
+            <div class="side-bar-links" name="expandable">
+                <a href="/home">
+                    <i class="material-icons">home</i>
+                    <span>Home</span>
+                </a>
+                <a href="/explore">
+                    <i class="material-icons">explore</i>
+                    <span>Explore</span>
+                </a>
+                <a href="/upload">
+                    <i class="material-icons">file_upload</i>
+                    <span>Upload</span>
+                </a>
+                <a href="/subscriptions">
+                    <i class="material-icons">subscriptions</i>
+                    <span>Subscriptions</span>
+                </a>
+                <a href="/inbox">
+                    <i class="material-icons">inbox</i>
+                    <span>Inbox</span>
+                </a>
+                <a href="/watchlater">
+                    <i class="material-icons">watch_later</i>
+                    <span>Watch Later</span>
+                </a>
+            </div>
+        </div>
         <div class="content" name="expandable">
             <div class="categories">
                 <section class="category-section">
@@ -24,7 +51,7 @@
                 {% for video in videos %}
                 <article class="video-card">
                     <a href="{% url 'watch' video.uuid %}" class="thumbnail" data-duration={{video.duration}}>
-                        <img class="thumbnail-image" src="http://unsplash.it/300/200/?random">
+                        <img class="thumbnail-image" src="http://unsplash.it/300/165/?random">
                     </a>
                     <div class="video-bottom-section">
                         <a href="#">

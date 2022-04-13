@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
-
 *,
 *::before,
 *::after {
@@ -10,7 +9,6 @@
     Arial,
     Helvetica,
     sans-serif;
-    /* border: 1px solid #0f0b0b; */
 }
 header {
     height: 3em;
