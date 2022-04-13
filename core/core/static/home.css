@@ -1,24 +1,38 @@
-
+*{transition: .5s all;}
 main {
     height: calc(100vh - 3em);
     display: flex;
     background-color: #f9f9f9;
 }
-/* Sidebar */
+/* Sidebar - 4em to 18em on expansion */
 .side-bar {
     height: 100%;
-    width: 20em;
+    width: 4em;
     background-color: rgb(167, 162, 162);
     overflow-y: hidden;
-    transition: .5s all;
+    
 }
-.content {
+.side-bar.expanded{
+    width: 18em;
+    background-color: rgb(143, 143, 143);
+}
+.side-bar.expanded::after{
+    background-color: rgba(0, 0, 0, 0.192);
+    position: absolute;
+    content: "";
+    width: calc(100% - 18em);
+    height: calc(100vh - 3em);
+    left: 18em;
+}
+.content{
     height: 100%;
-    width: calc(100% - 20em);
-    overflow-y: hidden;
-    background-color: aqua;
+    width: calc(100% - 4em);
+    background-color: rgb(151, 187, 218);
 }
-
+.content.expanded{
+    width: calc(100% - 18em);
+    background-color: rgb(255, 0, 0);
+}
 
 
 @media (max-width: 768px) {

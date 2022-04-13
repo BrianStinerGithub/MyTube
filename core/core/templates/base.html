@@ -3,6 +3,7 @@
     <meta charset="utf-8" />
     <title>{% block title %}Base{% endblock %}</title>
     <script src="../static/bootstrap.min.js"></script>
+    <script src="../static/custom.js"></script>
     <link rel="stylesheet" href="../static/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="../static/base.css">
@@ -12,7 +13,7 @@
 <body>
     <header>
         <li class="left">
-            <i class="material-icons" id="menu">menu</i>
+            <i class="material-icons" id="menu" onclick="collapse()">menu</i>
             <img src="https://www.freecodecamp.org/news/content/images/2022/01/yt-logo.png">
             <!-- TODO: change out for "MyTube" Logo. upload to imgur and link here -->
         </li>
