@@ -11,20 +11,20 @@
             <section class="video-section">
                 {% for video in videos %}
                 <article class="video-card">
-                    <a href="{% url 'Videos:watch' video.uuid %}" class="thumbnail" data-duration={{video.duration}}>
-                        <img class="thumbnail-image" src={{video.thumbnail}} />
+                    <a href="{% url 'watch' video.uuid %}" class="thumbnail" data-duration={{video.duration}}>
+                        <img class="thumbnail-image" src="http://unsplash.it/300/200/?random">
                     </a>
                     <div class="video-bottom-section">
                         <a href="#">
                             <img class="channel-icon" src="http://unsplash.it/36/36?gravity=center" />
                         </a>
                         <div class="video-details">
-                            <a href="{% url 'Videos:watch' video.uuid %}" class="video-title">Video Title</a>
-                            <a href="#" class="video-channel-name">Channel Name</a>
+                            <a href="{% url 'watch' video.uuid %}" class="video-title">{{video.name}}</a>
+                            <a href="#" class="video-channel-name">{{video.channel.name}}</a>
                             <div class="video-metadata">
                                 <span>{{video.views}} views</span>
                                 •
-                                <span>{{video.created_at}} ago</span>
+                                <span>{{video.created_at}}</span>
                             </div>
                         </div>
                     </div>
