@@ -1,0 +1,36 @@
+video {
+    object-fit: cover;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+h1,
+h2 {
+    color: white;
+    font-family: Trebuchet MS;
+    font-weight: bold;
+    text-align: center;
+}
+h1 {
+    font-size: 6rem;
+    margin-top: 30vh;
+    margin-bottom: 10vh;
+    white-space: break-spaces;
+    line-height: 96px;
+}
+a{
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    border: 2px solid white;
+    border-radius: 10px;
+    transition: .3s all;
+}
+a:hover{
+    background-color: white;
+    color: black;
+}
