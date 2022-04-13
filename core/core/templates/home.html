@@ -1,13 +1,76 @@
 {% extends 'base.html' %}
 {% block title %}Home{% endblock %}
-{% block style %}
-<link rel="stylesheet" href="../static/home.css">
-{% endblock %}
-
+{% block style %}<link rel="stylesheet" href="/static/home.css">{% endblock %}
+{% load static %}
 {% block content %}
     <main>
-        <div class="side-bar" name="expandable"></div>
-        <div class="content" name="expandable"></div>
+        <div class="side-bar" name="expandable">
+            <div class="side-bar-links" name="expandable">
+                <a href="/home">
+                    <i class="material-icons">home</i>
+                    <span>Home</span>
+                </a>
+                <a href="#">
+                    <i class="material-icons">explore</i>
+                    <span>Explore</span>
+                </a>
+                <a href="#">
+                    <i class="material-icons">file_upload</i>
+                    <span>Upload</span>
+                </a>
+                <a href="#">
+                    <i class="material-icons">subscriptions</i>
+                    <span>Subscriptions</span>
+                </a>
+                <a href="#">
+                    <i class="material-icons">inbox</i>
+                    <span>Inbox</span>
+                </a>
+                <a href="#">
+                    <i class="material-icons">watch_later</i>
+                    <span>Watch Later</span>
+                </a>
+            </div>
+        </div>
+        <div class="content" name="expandable">
+            <div class="categories">
+                <section class="category-section">
+                    <button class="category active">All</button>
+                    <button class="category">Category 1</button>
+                    <button class="category">Category 2</button>
+                    <button class="category">Category 3</button>
+                    <button class="category">Category 4</button>
+                    <button class="category">Category 5</button>
+                    <button class="category">Category 6</button>
+                    <button class="category">Category 7</button>
+                    <button class="category">Category 8</button>
+                    <button class="category">Category 9</button>
+                </section>
+            </div>
+            <section class="video-section">
+                {% for video in videos %}
+                <article class="video-card">
+                    <a href="{% url 'watch' video.uuid %}" class="thumbnail" data-duration={{video.duration}}>
+                        <img class="thumbnail-image" src="http://unsplash.it/300/165/?random">
+                    </a>
+                    <div class="video-bottom-section">
+                        <a href="#">
+                            <img class="channel-icon" src="http://unsplash.it/36/36?gravity=center" />
+                        </a>
+                        <div class="video-details">
+                            <a href="{% url 'watch' video.uuid %}" class="video-title">{{video.name}}</a>
+                            <a href="#" class="video-channel-name">{{video.channel.name}}</a>
+                            <div class="video-metadata">
+                                <span>{{video.views}} views</span>
+                                •
+                                <span>{{video.created_at}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+                {% endfor %}
+            </section>
+        </div>
     </main>
 {% endblock %}
 

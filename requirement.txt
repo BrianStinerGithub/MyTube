@@ -1,4 +1,0 @@
-authlib
-django
-pillow
-config

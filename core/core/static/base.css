@@ -1,13 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
-
-* {
+*,
+*::before,
+*::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    /* border: 1px solid #0f0b0b; */
-}
-body {
-    font-family: 'Roboto', sans-serif;
+    font-family: Roboto,
+    Arial,
+    Helvetica,
+    sans-serif;
 }
 header {
     height: 3em;
