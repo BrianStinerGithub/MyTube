@@ -2,3 +2,4 @@ authlib
 django
 pillow
 config
+requests
