@@ -19,7 +19,10 @@ def watch(request, video_id):
     video = models.Video.objects.get(uuid=video_id)
     return render(request, 'watch.html', {'video': video})
 
-
+@require_http_methods(["GET"])
+def view_channel(request, channel_id):
+    channel = models.Channel.objects.get(uuid=channel_id)
+    return render(request, 'view_channel.html', {'channel': channel})
 
 
 
@@ -39,13 +42,6 @@ def delete_video(request, video_id):
     video = models.Video.objects.get(uuid=video_id)
     models.Video.objects.delete(video)
     return redirect("home")
-
-
-# TODO: view_channel.html & CSS. Channel information, videos, playlists, etc.
-@require_http_methods(["GET"])
-def view_channel(request, channel_id):
-    channel = models.Channel.objects.get(uuid=channel_id)
-    return render(request, 'view_channel.html', {'channel': channel})
 
 @require_http_methods(["POST"])
 def create_channel(request, channel: models.Channel):

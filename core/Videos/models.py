@@ -1,6 +1,5 @@
 from asyncio.windows_events import NULL
 from unicodedata import category, decimal
-import uuid
 from django.db import models
 
 from core.settings import LANGUAGE_CODE

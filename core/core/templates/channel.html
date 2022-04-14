@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}{{channel.name}}{% endblock %}
+{% block style %}
+<link rel="stylesheet" href="/static/channel.css">{% endblock %}
+{% load static %}
+<header class="header">.</header>
+<main>
+    <div class="side-bar">.</div>
+    <div class="content">
+        <div class="channel-container">
+        </div>
+        <div class="channel-info">
+            <h1>{{channel.name}}</h1>
+            <p>{{channel.description}}</p>
+            <p>{{channel.created_at}}</p>
+            <p>{{channel.views}}</p>
+            <p>{{channel.likes}}</p>
+            <p>{{channel.dislikes}}</p>
+            <img src="{{channel.icon}}" alt="icon">
+            <img src="{{channel.banner}}" alt="banner">
+        </div>
+    </div>
+</main>
+{% endblock %}
