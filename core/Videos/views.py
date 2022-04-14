@@ -1,4 +1,3 @@
-from wsgiref.util import request_uri
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.views.decorators.http import require_http_methods

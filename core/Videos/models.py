@@ -1,4 +1,3 @@
-from asyncio.windows_events import NULL
 from unicodedata import category, decimal
 from django.db import models
 

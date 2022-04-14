@@ -1,5 +1,9 @@
 authlib
+urllib
 django
 pillow
 config
 requests
+json
+os
+sys
