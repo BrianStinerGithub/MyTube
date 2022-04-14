@@ -5,3 +5,4 @@ pillow
 config
 requests
 uuid
+psycopg2
