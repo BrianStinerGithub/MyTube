@@ -1,9 +1,11 @@
 FROM python:3.9.12
-EXPOSE 8000 8080
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+EXPOSE 8000
 WORKDIR /core
 COPY . .
 RUN pip3 install -r requirements.txt --no-cache-dir
-CMD ["python3", "manage.py", "runserver", "8000"]
+CMD ["python3", "manage.py", "runserver", "0.0.0.0:8000"]
 
 # docker run --name repo alpine/git clone \
 # https://github.com/docker/getting-started.git

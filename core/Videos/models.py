@@ -1,6 +1,5 @@
 from unicodedata import category, decimal
 from django.db import models
-
 from core.settings import LANGUAGE_CODE
 from uuid import uuid4
 

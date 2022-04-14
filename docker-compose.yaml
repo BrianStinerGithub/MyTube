@@ -1,7 +1,9 @@
 services: 
-  web: 
-    build: core 
-    ports: 
-      - "8000:8000" 
-      - "8080:8080"
+  web:
+    build: core
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/core
+    ports:
+      - "8000:8000"
 

@@ -1,9 +1,7 @@
 authlib
-urllib
+urllib3
 django
 pillow
 config
 requests
-json
-os
-sys
+uuid
