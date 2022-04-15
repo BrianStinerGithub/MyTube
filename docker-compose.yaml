@@ -2,7 +2,7 @@ version: "3.9.12"
 services:
   web:
     build: .
-    command: python manage.py runserver 127.0.0.1:8000
+    command: python3 manage.py runserver 127.0.0.1:8000
     volumes:
       - .:.
     ports:
