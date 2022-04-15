@@ -1,29 +1,35 @@
 {% extends 'base.html' %}
 {% block title %}{{video.name}}{% endblock %}
+{% block style %}
+<style>
+    video{
+        width: 80%;
+        aspect-ratio: 16/9;
+        background-color: black;
+    }
+    video:before{
+        content: "";
+        display: block;
+        background-color: #000;
+    }
+</style>
+{% endblock %}
 {% block content %}
-{% block style %}<link rel="stylesheet" href="/static/watch.css">{% endblock %}
-{% load static %}
-<header class="header">.</header>
-<main>
-    <div class="side-bar">.</div>
-    <div class="content">
-        <div class="video-container">
-            <video id="video" controls>
-                <source src="{{video.file}}" type="video/mp4">
-            </video>
-        </div>
-        <div class="video-info">
-            <h1>{{video.name}}</h1>
-            <p>{{video.description}}</p>
-            <p>{{video.uploaded_at}}</p>
-            <p>{{video.views}}</p>
-            <p>{{video.likes}}</p>
-            <p>{{video.dislikes}}</p>
-            <p>{{video.comments}}</p>
-            <img src="{{video.thumbnail}}" alt="{{video.name}}">
-        </div>
+    <div class="video-container">
+        <video id="video" controls>
+            <source src="{{video.url}}" type="video/mp4">
+        </video>
     </div>
-</main>
+    <div class="video-info">
+        <h1>{{video.name}}</h1>
+        <p>{{video.description}}</p>
+        <p>{{video.uploaded_at}}</p>
+        <p>{{video.views}}</p>
+        <p>{{video.likes}}</p>
+        <p>{{video.dislikes}}</p>
+        <p>{{video.comments}}</p>
+        <img src="{{video.thumbnailurl}}" alt="{{video.name}}">
+    </div>
 {% endblock %}
 
 

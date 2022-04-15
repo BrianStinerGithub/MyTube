@@ -1,40 +1,282 @@
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title>{% block title %}Base{% endblock %}</title>
-    <script src="../static/bootstrap.min.js"></script>
-    <script src="../static/custom.js"></script>
-    <link rel="stylesheet" href="../static/bootstrap.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="../static/base.css">
-    {% block style %}<link rel="stylesheet" href="../static/login.css">{% endblock %}
-    
-</head>
-<body>
-    <header>
-        <li class="left">
-            <i class="material-icons" id="menu" onclick="collapse()">menu</i>
-            <img src="https://i.imgur.com/OehxIeA.png">
-        </li>
-        <li class="center">
-            <form action="">
-                <input type="text" placeholder="Search..." />
-                <button><i class="material-icons">search</i></button>
-                <i class="material-icons">mic</i>
-            </form>
-        </li>
-        <li class="right">
-            <i class="material-icons">videocam</i>
-            <i class="material-icons">apps</i>
-            <i class="material-icons">notifications</i>
-            <i class="material-icons">account_circle</i>
-        </li>
-    </header>
-    {% block content %}
+<!-- { if session %} -->
+    <html>
+    <head>
+        <meta charset="utf-8" />
+        <title>{% block title %}Base{% endblock %}</title>
+        <script>
+            function collapse() {
+                const elements = document.getElementsByName('expandable');
+                for(let i = 0; i < elements.length; i++) {
+                    elements[i].classList.toggle('expanded');
+                }
+            }
+        </script>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+            @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+            *,
+            *::before,
+            *::after {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: Roboto,
+                Arial,
+                Helvetica,
+                sans-serif;
+            }
+            header {
+                height: 3em;
+                overflow-y: hidden;
+                align-items: center;
+                justify-content: space-between;
+                display: flex;
+                position: sticky;
+            }
+            header > li {
+                list-style: none;
+                display: inline-block;
+                align-items: center;
+                margin: 0.5em;
+            }
+            li{
+                cursor: pointer;
+            }
+            li.left {
+                float: left;
+                min-width: 8.6em;
+            }
+            li.right {
+                float: right;
+                min-width: 10.6em;
+            }
+            li.center {
+                width: 60%;
+            }
+            li.left i {
+                margin-top: .3em;
+                margin-left: .3em;
+                display: inline-flex;
+                float: left;
+                border:rgba(100, 100, 100, 0) solid 1px;
+                cursor: pointer;
+            }
+            li.left i:hover {
+                border:rgba(100, 100, 100, 0.4) solid 1px;
+                border-radius: 100%;
+
+            }
+            li.left img {
+                display: inline-flex;
+                float: right;
+            }
+            li.center form {
+                display: flex;
+                border: 1px solid rgb(255, 255, 255);
+                height: 90%;
+                align-items: center;
+            }
+            li.center input {
+                border: 0;
+                height: 100%;
+                width: 100%;
+                margin: 0px 5px 0 10px;
+                padding-left: 10px;
+            }
+            li.center input:focus {
+                outline: none;
+                border: 1px solid #ddd;
+                background-color: #f9f9f9d3;
+            }
+            li.center button {
+                height: 100%;
+                width: 40px;
+                border: 1px slategray;
+            }
+            li.right i {
+                color: rgb(100, 100, 100);
+                padding-left: .3em;
+                padding-right: .2em;
+                cursor: pointer;
+                float: none;
+            }
+            li.right i:hover {
+                color: rgb(50, 50, 50);
+                box-shadow: inset 0 0 25px 0px rgba(100, 100, 100, 0.089);
+                border-radius: 100px;
+            }
+
+            main {
+                height: calc(100vh - 3em);
+                display: flex;
+                background-color: #f9f9f9;
+            }
+
+            /* Sidebar - 4em to 18em on expansion */
+            .side-bar {
+                height: 100%;
+                width: 4em;
+                overflow: hidden;
+            }
+            .side-bar.expanded {
+                width: 18em;
+            }
+
+            .side-bar.expanded::after {
+                background-color: rgba(0, 0, 0, 0.192);
+                position: absolute;
+                content: "";
+                width: calc(100% - 18em);
+                height: calc(100vh - 3em);
+                left: 18em;
+                top: 3em;
+            }
+            div.side-bar-links {
+                display: grid;
+                grid-template-rows: repeat(auto-fill, 1fr);
+                gap: 1rem;
+                padding: 1rem 0;
+                margin: 0 1.5rem;
+                border-top: 4px solid #CCC;
+            }
+            div.side-bar-links:first-child {
+                border-top: 0;
+            }
+
+            div.side-bar-links>a {
+                display: flex;
+                align-items: center;
+                padding: .5rem 1rem;
+                margin-left: -1.5em;
+                text-decoration: none;
+                color: #555;
+                transition: color 250ms;
+            }
+
+            div.side-bar-links>a:hover {
+                color: #111;
+                background-color: rgba(203, 203, 203, 0.759);
+            }
+            div.side-bar-links>a>span {
+                margin-left: 5em;
+            }
+
+            div.content {
+                height: 100%;
+                width: calc(100% - 4em);
+            }
+
+            div.content.expanded {
+                width: calc(100% - 18em);
+            }
+        </style>
+    {% block style %}
+        <style> 
+            video {
+                object-fit: cover;
+                width: 100vw;
+                height: 100vh;
+                position: fixed;
+                top: 0;
+                left: 0;
+                z-index: -1;
+            }
+            h1, h2 {
+                color: white;
+                font-family: Trebuchet MS;
+                font-weight: bold;
+                text-align: center;
+            }
+            h1 {
+                font-size: 6rem;
+                margin-top: 30vh;
+                margin-bottom: 10vh;
+                white-space: break-spaces;
+                line-height: 96px;
+            }
+            a{
+                color: white;
+                text-decoration: none;
+                padding: 10px;
+                border: 2px solid white;
+                border-radius: 10px;
+                transition: .3s all;
+            }
+            a:hover{
+                background-color: white;
+                color: black;
+            }
+        </style>
+    {% endblock %}     
+    </head>
+    <body>
+        <header>
+            <li class="left">
+                <i class="material-icons" id="menu" onclick="collapse()">menu</i>
+                <img src="https://i.imgur.com/OehxIeA.png">
+            </li>
+            <li class="center">
+                <form action="">
+                    <input type="text" placeholder="Search..." />
+                    <button><i class="material-icons">search</i></button>
+                    <i class="material-icons">mic</i>
+                </form>
+            </li>
+            <li class="right">
+                <i class="material-icons">videocam</i>
+                <i class="material-icons">apps</i>
+                <i class="material-icons">notifications</i>
+                <i class="material-icons">account_circle</i>
+            </li>
+        </header>
+        <main>
+            <div class="side-bar" name="expandable">
+                <div class="side-bar-links" name="expandable">
+                    <a href="/home">
+                        <i class="material-icons">home</i>
+                        <span>Home</span>
+                    </a>
+                    <a href="#">
+                        <i class="material-icons">explore</i>
+                        <span>Explore</span>
+                    </a>
+                    <a href="#">
+                        <i class="material-icons">file_upload</i>
+                        <span>Upload</span>
+                    </a>
+                    <a href="#">
+                        <i class="material-icons">subscriptions</i>
+                        <span>Subscriptions</span>
+                    </a>
+                    <a href="#">
+                        <i class="material-icons">inbox</i>
+                        <span>Inbox</span>
+                    </a>
+                    <a href="#">
+                        <i class="material-icons">watch_later</i>
+                        <span>Watch Later</span>
+                    </a>
+                </div>
+            </div>
+            <div class="content" name="expandable">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </main>
+    </body>
+    {% block footer %}
     {% endblock %}
-</body>
-{% block footer %}
-{% endblock %}
+
+
+<!-- { else %}
+<video autoplay muted loop id="myVideo">
+    <source src="https://assets.codepen.io/6093409/river.mp4" type="video/mp4">
+</video>
+<h1 id="text-center">All the videos*, all in one place</h1>
+<h2><a href="{ url 'login' %}" id="LoginBtn">Login</a></h2>
+{ endif %} -->
+
+
 
 <!-- 
 
