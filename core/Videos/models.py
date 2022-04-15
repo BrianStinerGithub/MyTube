@@ -4,11 +4,11 @@ from django.db import models
 from core.settings import LANGUAGE_CODE
 from uuid import uuid4
 
-# Editable = True so we can view to UUID in the admin. 
+Editable = True
 # TODO: Make this editable=False before deployment.
 
 class Channel(models.Model):
-    uuid =          models.UUIDField(default=uuid4, editable=True, unique=True)
+    uuid =          models.UUIDField(default=uuid4, editable=Editable, unique=True)
     name =          models.CharField(max_length=255)
     about =         models.TextField(blank=True)
     views =         models.IntegerField(default=0)
@@ -18,24 +18,27 @@ class Channel(models.Model):
     icon =          models.ImageField(upload_to='Videos/Channels/icons/',blank=True)
     banner =        models.ImageField(upload_to='Videos/Channels/banners/',blank=True)
     subscribers =   models.ManyToManyField('auth.User', related_name='subscribers', blank=True)
-    videos =        models.ManyToManyField('Video', related_name='videos', blank=True)
+    videos =        models.ManyToManyField('Video', related_name='channel_videos', blank=True)
     subcriptions =  models.ManyToManyField('Channel', related_name='subscriptions', blank=True)
-    playlists =     models.ManyToManyField('Playlist', related_name='playlists', blank=True)
+    playlists =     models.ManyToManyField('Playlist', related_name='channel_playlists', blank=True)
     created_at =    models.DateTimeField(auto_now_add=True)
     updated_at =    models.DateTimeField(auto_now=True)
 
-    def __str__(self):
-        return self.uuid
 
-    def can_be_modified(self):
-        modifiable = uuid.UUIDField(editable=True)
-        return modifiable
-
-
+class Playlist(models.Model):
+    uuid =          models.UUIDField(default=uuid4, editable=Editable, unique=True)
+    name =          models.CharField(max_length=255)
+    about =         models.TextField(blank=True)
+    duration =      models.IntegerField(default=0)
+    views =         models.IntegerField(default=0)
+    videos =        models.ManyToManyField('Video', related_name='playlist_videos', blank=True)
+    channel =       models.ForeignKey('Channel',on_delete=models.SET_DEFAULT, default=1)
+    created_at =    models.DateTimeField(auto_now_add=True)
+    updated_at =    models.DateTimeField(auto_now=True)
 
 
 class Video(models.Model):
-    uuid =          models.UUIDField(default=uuid4, editable=True, unique=True)
+    uuid =          models.UUIDField(default=uuid4, editable=Editable, unique=True)
     name =          models.CharField(max_length=255)
     url =           models.URLField(max_length=255)
     thumbnailurl =  models.URLField(max_length=255, blank=True)      
