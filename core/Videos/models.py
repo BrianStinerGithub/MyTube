@@ -1,3 +1,4 @@
+import uuid
 from unicodedata import category, decimal
 from django.db import models
 from core.settings import LANGUAGE_CODE
@@ -23,14 +24,14 @@ class Channel(models.Model):
     created_at =    models.DateTimeField(auto_now_add=True)
     updated_at =    models.DateTimeField(auto_now=True)
 
-class Playlist(models.Model):
-    uuid =          models.UUIDField(default=uuid4, editable=True, unique=True)
-    name =          models.CharField(max_length=255)
-    about =         models.TextField(blank=True)
-    videos =        models.ManyToManyField('Video', related_name='playlist_videos', blank=True)
-    channel =       models.ForeignKey('Channel', on_delete=models.CASCADE, blank=True, null=True)
-    created_at =    models.DateTimeField(auto_now_add=True)
-    updated_at =    models.DateTimeField(auto_now=True)
+    def __str__(self):
+        return self.uuid
+
+    def can_be_modified(self):
+        modifiable = uuid.UUIDField(editable=True)
+        return modifiable
+
+
 
 
 class Video(models.Model):
