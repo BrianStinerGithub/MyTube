@@ -2,33 +2,129 @@
 {% block title %}{{video.name}}{% endblock %}
 {% block style %}
 <style>
-    video{
-        width: 80%;
-        aspect-ratio: 16/9;
-        background-color: black;
+    .leftside{
+        width: 100%;
+        height: 100%;
+        background-color: blue;
+        margin-left: 2em;
+        
     }
-    video:before{
-        content: "";
+    .video-container{
+        width: 100%;
+        background-color: black;
+        aspect-ratio: 16/9;
+        
+    }
+    video{
+        height: 100%;
+        margin-left: 50%;
+        transform: translateX(-50%);
+    }
+    .video-bottom-section{
+        display: flex;
+        align-items: flex-start;
+        margin-top: 1rem;
+    }
+    .video-info{
+        width: 100%;
+        padding-left: 1em;
+    }
+    h1{
+        margin-bottom: .6em;
+    }
+    div.left{
+        display: inline-flex;
+        float: left;
+    }
+    div.right{
+        display: inline-flex;
+        float: right;
+        margin-right: 5em;
+    }
+    div.right > a{
+        color: #555;
+
+    }
+    .rightside{
         display: block;
-        background-color: #000;
+        width: 30%;
+        margin-right: 1em;
+        margin-left: 3em;
+        background-color: brown;
+    }
+    @media(max-width: 1015px){
+        .rightside{
+            display: none;
+        }
+        .leftside{
+            margin: 0;
+        }
     }
 </style>
 {% endblock %}
 {% block content %}
-    <div class="video-container">
-        <video id="video" controls autoplay muted>
-            <source src="{{video.url}}" type="video/mp4">
-        </video>
+    <div class="leftside">
+        <div class="video-container">
+            <video id="video" controls autoplay muted>
+                <source src="{{video.url}}" type="video/mp4">
+            </video>
+        </div>
+        <div class="video-bottom-section">
+            <div class="video-info">
+                <div class="channel-icon"></div>
+                <h1>{{video.name}}</h1>
+                <div class="info-bar">
+                    <div class="left">
+                        <span>{{video.views}} views • {{video.created_at}}</span>
+                    </div>
+                    <div class="right">
+                        <a href="#">
+                            <i class="material-icons">thumb_up</i>
+                            <span>LIKE</span>
+                        </a>
+                        <a href="#">
+                            <i class="material-icons">thumb_down</i>
+                            <span>DISLIKE</span>
+                        </a>
+                        <a href="">
+                            <i class="material-icons">share</i>
+                            <span>SHARE</span>
+                        </a>
+                        <a href="">
+                            <i class="material-icons">download</i>
+                            <span>DOWNLOAD</span>
+                        </a>
+                        <a href="">
+                            <i class="material-icons">build</i>
+                            <span>WRENCH</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="video-info">
-        <h1>{{video.name}}</h1>
-        <p>{{video.description}}</p>
-        <p>{{video.uploaded_at}}</p>
-        <p>{{video.views}}</p>
-        <p>{{video.likes}}</p>
-        <p>{{video.dislikes}}</p>
-        <p>{{video.comments}}</p>
-        <img src="{{video.thumbnailurl}}" alt="{{video.name}}">
+    <div class="rightside">
+        {% for rvideo in rvideos %}
+        <article class="video-card">
+            <a href="{% url 'watch' rvideo.uuid %}" class="thumbnail" data-duration={{rvideo.duration}}>
+                <div class="thumbnail-image"><img src="{{rvideo.thumbnailurl}}" alt="{{rvideo.name}}"></div>
+            </a>
+            <div class="video-bottom-section">
+                <a href="#">
+                    <img class="channel-icon" src="http://unsplash.it/36/36?gravity=center" />
+                </a>
+                <div class="video-details">
+                    <a href="{% url 'watch' rvideo.uuid %}" class="video-title">{{rvideo.name}}</a>
+                    <a href="#" class="video-channel-name">{{rvideo.channel.name}}</a>
+                    <div class="video-metadata">
+                        <span>{{rvideo.views}} views</span>
+                        •
+                        <span>{{rvideo.created_at}}</span>
+                    </div>
+                </div>
+            </div>
+        </article>
+        {% endfor %}
     </div>
 {% endblock %}
 
