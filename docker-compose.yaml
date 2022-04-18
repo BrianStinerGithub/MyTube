@@ -1,6 +1,7 @@
-version: "3.9.12"
+version: '3.9'
 services:
   web:
+    image: mathmagicmachine/pythonprimer_web
     build: .
     command: python3 manage.py runserver 127.0.0.1:8000
     ports:
