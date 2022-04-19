@@ -1,3 +1,5 @@
+version: 0.2
+
 env:
   variables:
     IMAGE_NAME: pythonprimer_web
@@ -25,3 +27,6 @@ phases:
       - echo Build completed on `date`
       - echo Pushing the Docker image...
       - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO:$IMAGE_TAG
+artifacts:
+  files:
+    - packaged-template.yml
