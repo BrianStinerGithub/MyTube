@@ -25,8 +25,79 @@
                 Helvetica,
                 sans-serif;
             }
+            html{
+                scroll-behavior: smooth;
+                scrollbar-width: thin;
+                scrollbar-color: #333 #f1f1f1; 
+                /* experiment to see what scrollbar elements look good, use vw units if any. */
+            }
+            /* Add this attribute to the element that needs a tooltip */
+            /* TODO: see if this code is any good at making the tooltips look good. */
+            [data-tooltip] { 
+                position: relative;
+                z-index: 2;
+                cursor: pointer;
+            }
+            /* Hide the tooltip content by default */
+
+            [data-tooltip]:before,
+            [data-tooltip]:after {
+                visibility: hidden;
+                -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+                filter: progid: DXImageTransform.Microsoft.Alpha(Opacity=0);
+                opacity: 0;
+                pointer-events: none;
+            }
+            /* Position tooltip above the element */
+
+            [data-tooltip]:before {
+                position: absolute;
+                bottom: 150%;
+                left: 50%;
+                margin-bottom: 5px;
+                margin-left: -80px;
+                padding: 7px;
+                width: 160px;
+                border-radius: 2px;
+                border: 1px outset #C0C0C0;
+                box-shadow: 3px 2px 5px #9F9F9F;
+                background-color: #000;
+                background-color: hsla(206, 73%, 34%, 0.9);
+                color: #FFFFFF;
+                content: attr(data-tooltip);
+                text-align: center;
+                font-size: 11px;
+                font-family: "Trebuchet MS", Helvetica, sans-serif;
+                font-weight: bold;
+                line-height: 1.2;
+            }
+            /* Triangle hack to make tooltip look like a speech bubble */
+
+            [data-tooltip]:after {
+                position: absolute;
+                bottom: 150%;
+                left: 50%;
+                margin-left: -5px;
+                width: 0;
+                border-top: 5px solid #000;
+                border-top: 5px solid hsla(206, 73%, 34%, 0.9);
+                border-right: 5px solid transparent;
+                border-left: 5px solid transparent;
+                content: " ";
+                font-size: 0;
+                line-height: 0;
+            }
+            /* Show tooltip content on hover */
+
+            [data-tooltip]:hover:before,
+            [data-tooltip]:hover:after {
+                visibility: visible;
+                -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+                filter: progid: DXImageTransform.Microsoft.Alpha(Opacity=100);
+                opacity: 1;
+            }
             header {
-                height: 3em;
+                height: 3.33em;
                 overflow-y: hidden;
                 align-items: center;
                 justify-content: space-between;
@@ -112,12 +183,12 @@
             }
 
             main {
-                height: calc(100vh - 3em);
+                height: calc(100vh - 3.33em);
                 display: flex;
                 background-color: #f9f9f9;
             }
 
-            /* Sidebar - 4em to 18em on expansion */
+            /* Sidebar - 4em to 18em on expansion, also when expanded a shadow is over the content */
             .side-bar {
                 height: 100%;
                 width: 4em;
@@ -126,16 +197,18 @@
             .side-bar.expanded {
                 width: 18em;
             }
-
             .side-bar.expanded::after {
-                background-color: rgba(0, 0, 0, 0.192);
+                background-color: rgba(0, 0, 0, 0.245);
                 position: absolute;
                 content: "";
                 width: calc(100% - 18em);
-                height: calc(100vh - 3em);
                 left: 18em;
-                top: 3em;
+                height: calc(100vh - 3.33em);
+                top: 3.33em
             }
+
+            /* side-bar-links is a group seperated by a bar, each <a> within has an <i> symbol an a <span> label. */
+            /* on hover, the color shifts, and the label is only revealed when expanded. */
             div.side-bar-links {
                 display: grid;
                 grid-template-rows: repeat(auto-fill, 1fr);
@@ -147,7 +220,6 @@
             div.side-bar-links:first-child {
                 border-top: 0;
             }
-
             div.side-bar-links>a {
                 display: flex;
                 align-items: center;
@@ -157,7 +229,6 @@
                 color: #555;
                 transition: color 250ms;
             }
-
             div.side-bar-links>a:hover {
                 color: #111;
                 background-color: rgba(203, 203, 203, 0.759);
@@ -166,16 +237,18 @@
                 margin-left: 5em;
             }
 
+            /* Content - the main content area, shrinks when the sidebar is expanded. Inherited workspace for pages. */
             div.content {
                 height: 100%;
                 width: calc(100% - 4em);
             }
-
             div.content.expanded {
                 width: calc(100% - 18em);
             }
+
         </style>
     {% block style %}
+    <!-- This is the css for the logged out page. -->
         <style> 
             video {
                 object-fit: cover;
@@ -217,48 +290,48 @@
     <body>
         <header>
             <li class="left">
-                <i class="material-icons" id="menu" onclick="collapse()">menu</i>
-                <img src="https://i.imgur.com/OehxIeA.png" onclick="location.href='/'">
+                 <i class="material-icons" id="menu" onclick="collapse()">menu</i>      <!-- This is the hamburger menu icon. -->
+                <img src="https://i.imgur.com/OehxIeA.png" onclick="location.href='/'"> <!-- This is the MyTube logo. -->
             </li>
             <li class="center">
                 <form action="">
-                    <input type="text" placeholder="Search..." />
-                    <button><i class="material-icons">search</i></button>
-                    <i class="material-icons">mic</i>
+                    <input type="text" placeholder="Search..." />           <!-- This is the search bar. -->
+                    <button><i class="material-icons">search</i></button>   <!-- This is the search button. -->
+                    <i class="material-icons">mic</i>                       <!-- This is the mic icon. -->
                 </form>
             </li>
             <li class="right">
                 <i class="material-icons">videocam</i>
                 <i class="material-icons">apps</i>
                 <i class="material-icons">notifications</i>
-                <i class="material-icons">account_circle</i>
+                <i class="material-icons">account_circle</i> <!-- This is the profile icon. TODO: If logged in and they have a profile picture, use it. -->
             </li>
         </header>
         <main>
             <div class="side-bar" name="expandable">
                 <div class="side-bar-links" name="expandable">
-                    <a href="/home">
-                        <i class="material-icons">home</i>
+                    <a href="/home"> <!-- Ideally, these video are curated -->
+                        <i class="material-icons">home</i> <!-- -->
                         <span>Home</span>
                     </a>
-                    <a href="#">
+                    <a data-tooltip="explore" href="#"> <!--TODO: random videos fed to a homepage -->
                         <i class="material-icons">explore</i>
                         <span>Explore</span>
                     </a>
-                    <a href="#">
-                        <i class="material-icons">file_upload</i>
+                    <a data-tooltip="upload" href="#"> <!-- TODO: Paste link to .mp4, or youtube video. If file, upload with youtube api and get link -->
+                        <i class="material-icons">file_upload</i> <!-- A link to a video as .mp4 in a <video> --> <!--TODO: OR a youtube video in an <iframe> -->
                         <span>Upload</span>
                     </a>
-                    <a href="#">
-                        <i class="material-icons">subscriptions</i>
+                    <a data-tooptip="subscriptions" href="#"> <!-- TODO: all subscription video ordered by created_by -->
+                        <i class="material-icons">subscriptions</i> <!-- A list of channels added to by clicking a button under a video. -->
                         <span>Subscriptions</span>
                     </a>
-                    <a href="#">
+                    <a data-tooptip="inbox" href="#"> 
                         <i class="material-icons">inbox</i>
                         <span>Inbox</span>
                     </a>
-                    <a href="#">
-                        <i class="material-icons">watch_later</i>
+                    <a datatooptip="watch later" href="#"> <!-- Display this playlist -->
+                        <i class="material-icons">watch_later</i> <!-- A list of videos added to by clicking a button under a video. -->
                         <span>Watch Later</span>
                     </a>
                 </div>

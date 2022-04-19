@@ -7,18 +7,17 @@
         height: 100%;
         background-color: blue;
         margin-left: 2em;
-        
     }
+
     .video-container{
+        min-height: 30rem;
+        min-width: 14.125rem;
         width: 100%;
         background-color: black;
-        aspect-ratio: 16/9;
-        
     }
     video{
-        height: 100%;
-        margin-left: 50%;
-        transform: translateX(-50%);
+        object-fit: contain;
+        /* margin-left: 50%; transform: translateX(-50%);  To center videos with the container but maybe not needed with contain*/
     }
     .video-bottom-section{
         display: flex;
@@ -62,36 +61,46 @@
     }
 </style>
 {% endblock %}
-{% block content %}
-    <div class="leftside">
-        <div class="video-container">
-            <video id="video" controls autoplay muted>
-                <source src="{{video.url}}" type="video/mp4">
-            </video>
-        </div>
+
+
+{% block content %}   
+    {% if video.url.endswith('.mp4') %}
+    <div class="video-container">
+        <video controls autoplay>
+            <source src="{{video.url}}" type="video/mp4">
+        </video>
+    </div>
+    {% else %}
+    <iframe src="{{video.url}}" frameborder="0" 
+        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+    </iframe>
+    {% endif %}
+    <!-- depending on the url, switch to an <iframe> when its a youtube video id or a <video> if its a file url -->
+
+    <div class="leftside">    
         <div class="video-bottom-section">
             <div class="video-info">
                 <div class="channel-icon"></div>
                 <h1>{{video.name}}</h1>
                 <div class="info-bar">
                     <div class="left">
-                        <span>{{video.views}} views • {{video.created_at}}</span>
+                        <span>{{video.views}} views • {{video.created_at}}</span> <!-- needs to be formatted-->
                     </div>
                     <div class="right">
                         <a href="#">
-                            <i class="material-icons">thumb_up</i>
+                            <i class="material-icons">thumb_up</i> <!-- function to modify channel.likes, likedvideo playlist, video.likes-->
                             <span>LIKE</span>
                         </a>
                         <a href="#">
-                            <i class="material-icons">thumb_down</i>
+                            <i class="material-icons">thumb_down</i> <!-- function to modify channel.dislikes, video.dislikes-->
                             <span>DISLIKE</span>
                         </a>
                         <a href="">
-                            <i class="material-icons">share</i>
+                            <i class="material-icons">share</i> <!-- add to playlist, like watch later. -->
                             <span>SHARE</span>
                         </a>
                         <a href="">
-                            <i class="material-icons">download</i>
+                            <i class="material-icons">download</i> <!-- Can't do this so lets replace it with a different item. -->
                             <span>DOWNLOAD</span>
                         </a>
                         <a href="">
@@ -102,9 +111,11 @@
                 </div>
             </div>
         </div>
+        <!-- this is where the comments go. -->
     </div>
+
     <div class="rightside">
-        {% for rvideo in rvideos %}
+        {% for rvideo in rvideos %} <!-- related videos get passed to the watch page to display on the side. -->
         <article class="video-card">
             <a href="{% url 'watch' rvideo.uuid %}" class="thumbnail" data-duration={{rvideo.duration}}>
                 <div class="thumbnail-image"><img src="{{rvideo.thumbnailurl}}" alt="{{rvideo.name}}"></div>
@@ -126,6 +137,7 @@
         </article>
         {% endfor %}
     </div>
+
 {% endblock %}
 
 

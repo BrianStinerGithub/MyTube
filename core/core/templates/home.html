@@ -162,7 +162,7 @@
 {% block content %}
     <div class="categories">
         <section class="category-section">
-            <button class="category active" onclick="location.href='/admin';">admin</button>
+            <button class="category active" onclick="location.href='/admin';">admin</button> <!-- these categories need to be programatic and real clickable filters. -->
             <button class="category">Category 1</button>
             <button class="category">Category 2</button>
             <button class="category">Category 3</button>
@@ -177,18 +177,18 @@
     <section class="video-section">
         {% for video in videos %}
         <article class="video-card">
-            <a href="{% url 'watch' video.uuid %}" class="thumbnail" data-duration={{video.duration}}>
-                <div class="thumbnail-image"><img src="{{video.thumbnailurl}}" alt="{{video.name}}"></div>
+            <a href="{% url 'watch' video.uuid %}" class="thumbnail" data-duration={{video.duration}}> <!-- this is a link to the video watch page -->
+                <div class="thumbnail-image"><img src="{{video.thumbnailurl}}" alt="{{video.name}}"></div> <!-- thumbnail image, TODO: on hover, expand div and replace img with iframe or video. -->
             </a>
             <div class="video-bottom-section">
                 <a href="#">
-                    <img class="channel-icon" src="http://unsplash.it/36/36?gravity=center" />
+                    <img class="channel-icon" src="http://unsplash.it/36/36?gravity=center" /> <!-- this needs to be a real channel icon -->
                 </a>
                 <div class="video-details">
                     <a href="{% url 'watch' video.uuid %}" class="video-title">{{video.name}}</a>
                     <a href="#" class="video-channel-name">{{video.channel.name}}</a>
                     <div class="video-metadata">
-                        <span>{{video.views}} views</span>
+                        <span>{{video.views}} views</span> <!-- these need to be formatted-->
                         •
                         <span>{{video.created_at}}</span>
                     </div>
