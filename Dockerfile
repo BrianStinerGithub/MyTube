@@ -1,21 +1,11 @@
-FROM python:3.9.12
-COPY requirements.txt .
-RUN pip3 install -r requirements.txt
-COPY . .
+FROM python:3.9
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+WORKDIR /code
+COPY requirements.txt /code/
+RUN pip install -r requirements.txt
+COPY . /code/
 EXPOSE 8000
-CMD ["python3", "core/manage.py", "runserver", "8000"]
-
-
-# docker run --name repo alpine/git clone \
-# https://github.com/docker/getting-started.git
-
-# docker cp repo:/git/getting-started/
-# cd getting-started
-
-# docker build -t docker101tutorial .
-
-
-# apk update && apk upgrade && apk add python3
-
-# ENV PYTHONDONTWRITEBYTECODE=1
-# ENV PYTHONUNBUFFERED=1
+RUN chmod +x /code/entrypoint.sh
+ENTRYPOINT ["/code/entrypoint.sh"]
+CMD ["gunicorn", "core.wsgi:application", "-w", "4", "-b", "0.0.0.0:8000"]

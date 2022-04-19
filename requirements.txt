@@ -6,3 +6,4 @@ config
 requests
 uuid
 psycopg2
+gunicorn
